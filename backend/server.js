@@ -32,11 +32,12 @@ app.get('/', (req, res) => {
 // ── Connect to MongoDB & Start Server ─────────────────────
 const PORT = process.env.PORT || 5000;
 
+console.log('Attempting to connect to MongoDB...');
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('✅ MongoDB connected');
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
   })
@@ -44,3 +45,4 @@ mongoose
     console.error('❌ MongoDB connection error:', err.message);
     process.exit(1);
   });
+
